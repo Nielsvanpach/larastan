@@ -95,8 +95,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
     /**
      * NoRedundantCollectionCallRule constructor.
      *
-     * @param  ReflectionProvider  $reflectionProvider
-     * @param  ModelPropertyExtension  $propertyExtension
      * @param  string[]  $onlyMethods
      * @param  string[]  $excludeMethods
      */
@@ -133,17 +131,12 @@ class NoUnnecessaryCollectionCallRule implements Rule
         }
     }
 
-    /**
-     * @return string
-     */
     public function getNodeType(): string
     {
         return MethodCall::class;
     }
 
     /**
-     * @param  Node  $node
-     * @param  Scope  $scope
      * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array
@@ -219,11 +212,9 @@ class NoUnnecessaryCollectionCallRule implements Rule
     /**
      * Determines whether the first argument is a string and references a database column.
      *
-     * @param  Node\Expr\StaticCall|MethodCall  $node
      * @param  Scope  $scope
-     * @return bool
      */
-    protected function firstArgIsDatabaseColumn($node, Scope $scope): bool
+    protected function firstArgIsDatabaseColumn(\PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\StaticCall $node, Scope $scope): bool
     {
         /** @var \PhpParser\Node\Arg[] $args */
         $args = $node->args;
@@ -273,10 +264,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Returns whether the method call is a call on a builder instance.
-     *
-     * @param  Node\Expr  $call
-     * @param  Scope  $scope
-     * @return bool
      */
     protected function callIsQuery(Node\Expr $call, Scope $scope): bool
     {
@@ -303,9 +290,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Returns whether the method is one of the risky methods.
-     *
-     * @param  Identifier  $name
-     * @return bool
      */
     protected function isRiskyMethod(Identifier $name): bool
     {
@@ -314,9 +298,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Returns whether the method might be a risky method depending on the parameters passed.
-     *
-     * @param  Identifier  $name
-     * @return bool
      */
     protected function isRiskyParamMethod(Identifier $name): bool
     {
@@ -325,9 +306,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Returns whether its argument is some builder instance.
-     *
-     * @param  Type  $type
-     * @return bool
      */
     protected function isBuilder(Type $type): bool
     {
@@ -338,10 +316,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Returns whether the Expr was not called on a Collection instance.
-     *
-     * @param  Node\Expr  $expr
-     * @param  Scope  $scope
-     * @return bool
      */
     protected function isCalledOnCollection(Node\Expr $expr, Scope $scope): bool
     {
@@ -352,9 +326,6 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Formats the error.
-     *
-     * @param  string  $method_name
-     * @return string
      */
     protected function formatError(string $method_name): string
     {

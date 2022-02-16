@@ -118,8 +118,6 @@ final class SchemaAggregator
     }
 
     /**
-     * @param  string  $tableName
-     * @param  string  $argName
      * @param  PhpParser\Node\Stmt[]  $stmts
      *
      * @throws \Exception

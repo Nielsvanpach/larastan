@@ -74,10 +74,6 @@ class ModelRelationsDynamicMethodReturnTypeExtension implements DynamicMethodRet
     }
 
     /**
-     * @param  MethodReflection  $methodReflection
-     * @param  MethodCall  $methodCall
-     * @param  Scope  $scope
-     * @return Type
      *
      * @throws ShouldNotHappenException
      */

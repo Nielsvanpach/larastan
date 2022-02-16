@@ -126,7 +126,7 @@ class ClassMapGenerator
      *
      * @throws \RuntimeException When the path is neither an existing file nor directory
      */
-    public static function createMap($path, $excluded = null, $io = null, $namespace = null, $autoloadType = null, &$scannedFiles = [])
+    public static function createMap(array|string|\Traversable $path, $excluded = null, $io = null, $namespace = null, $autoloadType = null, &$scannedFiles = [])
     {
         $basePath = $path;
         if (is_string($path)) {

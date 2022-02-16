@@ -29,9 +29,6 @@ class CheckDispatchArgumentTypesCompatibleWithClassConstructorRule implements Ru
     /** @var string */
     private $dispatchableClass;
 
-    /**
-     * @param  string  $dispatchableClass
-     */
     public function __construct(
         ReflectionProvider $reflectionProvider,
         FunctionCallParametersCheck $check,

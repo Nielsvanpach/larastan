@@ -26,7 +26,6 @@ final class ApplicationResolver
     /**
      * Creates an application and registers service providers found.
      *
-     * @return \Illuminate\Contracts\Foundation\Application
      *
      * @throws \ReflectionException
      */
@@ -69,7 +68,6 @@ final class ApplicationResolver
     /**
      * @phpstan-param class-string $class
      *
-     * @return bool
      *
      * @throws \ReflectionException
      */
@@ -86,9 +84,7 @@ final class ApplicationResolver
     }
 
     /**
-     * @param  string  $namespace
      * @return string[]
-     *
      * @throws \ReflectionException
      */
     private static function getProjectClasses(string $namespace, string $vendorDir): array
@@ -129,8 +125,6 @@ final class ApplicationResolver
     }
 
     /**
-     * @param  string  $namespace
-     * @param  string  $vendorDir
      * @return string[]
      *
      * @throws \ReflectionException

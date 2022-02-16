@@ -47,9 +47,7 @@ class ModelPropertyStaticCallRule implements Rule
 
     /**
      * @param  Node\Expr\StaticCall  $node
-     * @param  Scope  $scope
      * @return string[]
-     *
      * @throws \PHPStan\ShouldNotHappenException|\PHPStan\Reflection\MissingMethodFromReflectionException
      */
     public function processNode(Node $node, Scope $scope): array

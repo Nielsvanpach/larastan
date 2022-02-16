@@ -41,7 +41,6 @@ class ModelPropertyRule implements Rule
 
     /**
      * @param  MethodCall  $node
-     * @param  Scope  $scope
      * @return string[]
      */
     public function processNode(Node $node, Scope $scope): array

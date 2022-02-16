@@ -46,12 +46,7 @@ final class EloquentBuilderMethodReflection implements MethodReflection
     private $isVariadic;
 
     /**
-     * @param  string  $methodName
-     * @param  ClassReflection  $classReflection
-     * @param  MethodReflection  $originalMethodReflection
      * @param  ParameterReflection[]  $parameters
-     * @param  Type|null  $returnType
-     * @param  bool  $isVariadic
      */
     public function __construct(string $methodName, ClassReflection $classReflection, MethodReflection $originalMethodReflection, array $parameters, ?Type $returnType = null, bool $isVariadic = false)
     {
@@ -144,9 +139,6 @@ final class EloquentBuilderMethodReflection implements MethodReflection
         return TrinaryLogic::createMaybe();
     }
 
-    /**
-     * @return MethodReflection
-     */
     public function getOriginalMethodReflection(): MethodReflection
     {
         return $this->originalMethodReflection;
