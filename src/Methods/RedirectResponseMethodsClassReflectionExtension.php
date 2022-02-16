@@ -19,7 +19,7 @@ class RedirectResponseMethodsClassReflectionExtension implements Reflection\Meth
             return false;
         }
 
-        if (strpos($methodName, 'with') !== 0) {
+        if (!str_starts_with($methodName, 'with')) {
             return false;
         }
 

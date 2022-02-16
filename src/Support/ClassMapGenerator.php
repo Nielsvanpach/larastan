@@ -66,7 +66,7 @@ class ClassMapGenerator
      */
     public static function isAbsolutePath($path)
     {
-        return substr($path, 0, 1) === '/' || substr($path, 1, 1) === ':' || substr($path, 0, 2) === '\\\\';
+        return str_starts_with($path, '/') || substr($path, 1, 1) === ':' || str_starts_with($path, '\\\\');
     }
 
     /**
@@ -94,7 +94,7 @@ class ClassMapGenerator
             $path = substr($path, strlen($prefix));
         }
 
-        if (substr($path, 0, 1) === '/') {
+        if (str_starts_with($path, '/')) {
             $absolute = true;
             $path = substr($path, 1);
         }
@@ -192,7 +192,7 @@ class ClassMapGenerator
 
             foreach ($classes as $class) {
                 // skip classes not within the given namespace prefix
-                if (null === $autoloadType && null !== $namespace && '' !== $namespace && 0 !== strpos($class, $namespace)) {
+                if (null === $autoloadType && null !== $namespace && '' !== $namespace && !str_starts_with($class, $namespace)) {
                     continue;
                 }
 
@@ -232,7 +232,7 @@ class ClassMapGenerator
 
         foreach ($classes as $class) {
             // silently skip if ns doesn't have common root
-            if ('' !== $baseNamespace && 0 !== strpos($class, $baseNamespace)) {
+            if ('' !== $baseNamespace && !str_starts_with($class, $baseNamespace)) {
                 continue;
             }
             // transform class name to file path and validate
@@ -316,7 +316,7 @@ class ClassMapGenerator
         // strip strings
         $contents = preg_replace('{"[^"\\\\]*+(\\\\.[^"\\\\]*+)*+"|\'[^\'\\\\]*+(\\\\.[^\'\\\\]*+)*+\'}s', 'null', $contents);
         // strip leading non-php code if needed
-        if (substr($contents, 0, 2) !== '<?') {
+        if (!str_starts_with($contents, '<?')) {
             $contents = preg_replace('{^.+?<\?}s', '<?', $contents, 1, $replacements);
             if ($replacements === 0) {
                 return [];

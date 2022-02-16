@@ -43,7 +43,7 @@ final class ApplicationResolver
                 $namespace
             ) {
                 /** @var class-string $class */
-                return strpos($class, $namespace) === 0 && self::isServiceProvider($class);
+                return str_starts_with($class, $namespace) && self::isServiceProvider($class);
             }));
 
             foreach ($serviceProviders as $serviceProvider) {
