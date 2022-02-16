@@ -42,6 +42,9 @@ class NoModelMakeRule implements Rule
         $this->reflectionProvider = $reflectionProvider;
     }
 
+    /**
+     * return class-string<TNodeType>
+     */
     public function getNodeType(): string
     {
         return StaticCall::class;

@@ -26,7 +26,6 @@ final class ApplicationResolver
     /**
      * Creates an application and registers service providers found.
      *
-     *
      * @throws \ReflectionException
      */
     public static function resolve(): Application

@@ -13,6 +13,7 @@ use Illuminate\Support\Str;
 use NunoMaduro\Larastan\Properties\ModelPropertyExtension;
 use PhpParser\Node;
 use PhpParser\Node\Expr\MethodCall;
+use PhpParser\Node\Expr\StaticCall;
 use PhpParser\Node\Identifier;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\ReflectionProvider;
@@ -141,7 +142,7 @@ class NoUnnecessaryCollectionCallRule implements Rule
      */
     public function processNode(Node $node, Scope $scope): array
     {
-        /** @var \PhpParser\Node\Expr\MethodCall $node */
+        /** @var MethodCall $node */
         if (! $node->name instanceof Identifier) {
             return [];
         }
@@ -161,7 +162,7 @@ class NoUnnecessaryCollectionCallRule implements Rule
             return [];
         }
 
-        /** @var Node\Expr\MethodCall|Node\Expr\StaticCall $previousCall */
+        /** @var MethodCall|StaticCall $previousCall */
         if (! ($previousCall->name instanceof Identifier)) {
             // Previous call was made dynamically e.g. User::query()->{$method}()
             // Can't really analyze it in this scenario so no errors.
@@ -211,10 +212,8 @@ class NoUnnecessaryCollectionCallRule implements Rule
 
     /**
      * Determines whether the first argument is a string and references a database column.
-     *
-     * @param  Scope  $scope
      */
-    protected function firstArgIsDatabaseColumn(\PhpParser\Node\Expr\MethodCall|\PhpParser\Node\Expr\StaticCall $node, Scope $scope): bool
+    protected function firstArgIsDatabaseColumn(MethodCall|StaticCall $node, Scope $scope): bool
     {
         /** @var \PhpParser\Node\Arg[] $args */
         $args = $node->args;
@@ -222,7 +221,7 @@ class NoUnnecessaryCollectionCallRule implements Rule
             return false;
         }
 
-        if ($node instanceof Node\Expr\StaticCall) {
+        if ($node instanceof StaticCall) {
             /** @var Node\Name $class */
             $class = $node->class;
 
@@ -273,7 +272,7 @@ class NoUnnecessaryCollectionCallRule implements Rule
             return $this->isBuilder($calledOn);
         }
 
-        if ($call instanceof Node\Expr\StaticCall) {
+        if ($call instanceof StaticCall) {
             /** @var Node\Name $class */
             $class = $call->class;
             if ($class instanceof Node\Name) {

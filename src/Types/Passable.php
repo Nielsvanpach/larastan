@@ -17,9 +17,6 @@ final class Passable implements PassableContract
      */
     private $type;
 
-    /**
-     * Passable constructor.
-     */
     public function __construct(Type $type)
     {
         $this->type = $type;

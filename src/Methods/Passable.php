@@ -57,9 +57,6 @@ final class Passable implements PassableContract
      */
     private $staticAllowed = false;
 
-    /**
-     * Method constructor.
-     */
     public function __construct(
         PhpMethodReflectionFactory $methodReflectionFactory,
         ReflectionProvider $reflectionProvider,
